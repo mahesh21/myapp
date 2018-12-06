@@ -52,4 +52,5 @@ def query(hostname):
     replace(replace(replace(Physical_Disk9,'%2C', ','),'%20', ' '),'%3A', ':') as Physical_Disk9,
     replace(replace(replace(Physical_Disk10,'%2C', ','),'%20', ' '),'%3A', ':') as Physical_Disk10,
     Architecture,IP_Addresses,Kernel,Last_Bundle,replace(Legacy_Name,'%20', ' ') as Legacy_Name,
-    replace(replace(MAC_Addresses,'%3A', ':'),'%20', ' ') as MAC_Addresses from HCM_CA_data where Server_Name like '"+hostname+"';"
+    replace(replace(MAC_Addresses,'%3A', ':'),'%20', ' ') as MAC_Addresses 
+    from HCM_CA_data where Server_Name like '{}';""".format(hostname)
