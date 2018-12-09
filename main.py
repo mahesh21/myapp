@@ -4,6 +4,7 @@ from flask import render_template
 from flask import request
 import config
 import re 
+#import MySQLdb
 
 host = config.host
 user = config.user

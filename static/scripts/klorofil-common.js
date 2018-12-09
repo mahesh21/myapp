@@ -208,7 +208,7 @@ $(document).ready(function() {
 // toggle function
 $.fn.clickToggle = function( f1, f2 ) {
 	return this.each( function() {
-		var clicked = false;
+		var clicked = true;
 		$(this).bind('click', function() {
 			if(clicked) {
 				clicked = false;
@@ -220,6 +220,4 @@ $.fn.clickToggle = function( f1, f2 ) {
 		});
 	});
 
-}
-
-
+};
