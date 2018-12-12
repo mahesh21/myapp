@@ -80,30 +80,58 @@ $(document).ready(function() {
 	});
 
 	// panel collapse/expand
-	var affectedElement = $('.panel-body');
+	var affectedElement = $('.parent-body');
 
-	$('.panel .btn-toggle-collapse').clickToggle(
+	$('.parent-panel .parent-btn.btn-toggle-collapse').clickToggle(
 		function(e) {
 			e.preventDefault();
 
 			// if has scroll
-			if( $(this).parents('.panel').find('.slimScrollDiv').length > 0 ) {
+			if( $(this).parents('.parent-panel').find('.slimScrollDiv').length > 0 ) {
 				affectedElement = $('.slimScrollDiv');
 			}
 
-			$(this).parents('.panel').find(affectedElement).slideUp(300);
-			$(this).find('i.lnr-chevron-up').toggleClass('lnr-chevron-down');
+			$(this).parents('.parent-panel').find(affectedElement).slideUp(300);
+			$(this).find('i.parent-lnr.lnr-chevron-up').toggleClass('lnr-chevron-down');
 		},
 		function(e) {
 			e.preventDefault();
 
 			// if has scroll
-			if( $(this).parents('.panel').find('.slimScrollDiv').length > 0 ) {
+			if( $(this).parents('.parent-panel').find('.slimScrollDiv').length > 0 ) {
 				affectedElement = $('.slimScrollDiv');
 			}
 
-			$(this).parents('.panel').find(affectedElement).slideDown(300);
-			$(this).find('i.lnr-chevron-up').toggleClass('lnr-chevron-down');
+			$(this).parents('.parent-panel').find(affectedElement).slideDown(300);
+			$(this).find('i.parent-lnr.lnr-chevron-up').toggleClass('lnr-chevron-down');
+		}
+	);
+
+	// panel collapse/expand
+	var childElementBody = $('.child-body');
+
+	$('.child-panel .child-btn.btn-toggle-collapse').clickToggle(
+		function(e) {
+			e.preventDefault();
+
+			// if has scroll
+			if( $(this).parents('.child-panel').find('.slimScrollDiv').length > 0 ) {
+				childElementBody = $('.slimScrollDiv');
+			}
+
+			$(this).parents('.child-panel').find(childElementBody).slideUp(300);
+			$(this).find('i.child-lnr.lnr-chevron-up').toggleClass('lnr-chevron-down');
+		},
+		function(e) {
+			e.preventDefault();
+
+			// if has scroll
+			if( $(this).parents('.child-panel').find('.slimScrollDiv').length > 0 ) {
+				childElementBody = $('.slimScrollDiv');
+			}
+
+			$(this).parents('.child-panel').find(childElementBody).slideDown(300);
+			$(this).find('i.child-lnr.lnr-chevron-up').toggleClass('lnr-chevron-down');
 		}
 	);
 
