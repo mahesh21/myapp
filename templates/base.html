@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="/static/vendor/linearicons/style.css">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="/static/css/main.css">
-	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-	<link rel="stylesheet" href="/static/css/demo.css">
+	<link rel="stylesheet" href="/static/css/app.css">
+	
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
@@ -28,12 +28,13 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
 				<a href="/">WFQ</a>
+				<a href="/"><img src="/static/img/logo.png" alt="WFQ" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				
 				<form class="navbar-form navbar-right" method="post" action="/">
 					<div class="input-group">
-						<input type="text" value="" class="form-control" placeholder="Search ..." name="hostname">
+						<input type="text" value="" class="form-control" placeholder="Search ..." name="hostname" id="hostname">
 						<span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
 					</div>
 				</form>
@@ -63,7 +64,55 @@
 	<script src="/static/vendor/jquery/jquery.min.js"></script>
 	<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/static/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/static/vendor/jquery/jquery-ui.js"></script>
 	<script src="/static/scripts/klorofil-common.js"></script>
+	<script>
+		$( function() {
+		  var availableHosts = [
+			"host1",
+			"host2",
+			"host3"
+		  ];
+		  function split( val ) {
+			return val.split( /,\s*/ );
+		  }
+		  function extractLast( term ) {
+			return split( term ).pop();
+		  }
+	   
+		  $( "#hostname" )
+			// don't navigate away from the field on tab when selecting an item
+			.on( "keydown", function( event ) {
+			  if ( event.keyCode === $.ui.keyCode.TAB &&
+				  $( this ).autocomplete( "instance" ).menu.active ) {
+				event.preventDefault();
+			  }
+			})
+			.autocomplete({
+			  minLength: 0,
+			  source: function( request, response ) {
+				// delegate back to autocomplete, but extract the last term
+				response( $.ui.autocomplete.filter(
+					availableHosts, extractLast( request.term ) ) );
+			  },
+			  focus: function() {
+				// prevent value inserted on focus
+				return false;
+			  },
+			  select: function( event, ui ) {
+				var terms = split( this.value );
+				// remove the current input
+				terms.pop();
+				// add the selected item
+				terms.push( ui.item.value );
+				// add placeholder to get the comma-and-space at the end
+				terms.push( "" );
+				this.value = terms.join( ", " );
+				return false;
+			  }
+			});
+		} );
+		</script>
 </body>
 
 </html>
