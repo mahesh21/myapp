@@ -4,7 +4,10 @@ from flask import render_template
 from flask import request
 import config
 import re 
-#import MySQLdb
+import pymysql
+pymysql.install_as_MySQLdb()
+import MySQLdb
+import json
 
 host = config.host
 user = config.user
@@ -18,6 +21,8 @@ app = Flask(__name__)
 class HostAPI(MethodView):
 
     def get(self):
+        errorMSg = "No host Found"
+        #return render_template('error.html',errMsg=errorMSg)
         return render_template('index.html',data={})
 
     def post(self):
@@ -40,7 +45,21 @@ class HostAPI(MethodView):
         """
         return render_template('hostinfo.html',data=data)
 
+class ServerAPI(MethodView):
+
+    def get(self):
+        data=[]
+        hostname = request.args.get('hostname')
+        dbs = MySQLdb.connect("localhost","mahesh","password","servers")
+        sql_query = "select server_name as value from servers where server_name like '%{0}%'".format(hostname)
+        cur = dbs.cursor(MySQLdb.cursors.DictCursor)
+        count = cur.execute(sql_query)
+        if count:
+            data = cur.fetchall()
+        return json.dumps(data)
+
 app.add_url_rule('/', view_func=HostAPI.as_view('index'))
+app.add_url_rule('/searchhost', view_func=ServerAPI.as_view('searchhost'))
 
 
 if __name__ == '__main__':
