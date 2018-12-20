@@ -43,4 +43,47 @@ $( function() {
           return false;
         }
       });
-  } );
+
+      
+
+  
+  
+
+  //var doc = new jsPDF('p', 'pt', 'letter');
+  /*var doc = new jsPDF('p', 'mm', 'a4');
+  var specialElementHandlers = {
+      '#editor': function (element, renderer) {
+          return true;
+      }
+  };
+  
+  $('#pdfBtn').click(function () {
+    //doc.canvas.height = 72 * 11;
+      //      doc.canvas.width = 72 * 8.5;
+      doc.fromHTML($('#hostinfoDiv').html(), 15, 15, {
+          'width': 550,
+              'elementHandlers': specialElementHandlers
+      });
+      doc.save('sample-file.pdf');
+  });*/
+  $('#csvBtn').click(function () {
+    console.log("kkkkkk");
+  
+    $('#hostTable').csvExport({
+      title:'HostTables'
+    });
+
+/*  let options = {
+    "separator": ",",
+    "newline": "\n",
+    "quoteFields": true,
+    "excludeColumns": "",
+    "excludeRows": "",
+    "trimContent": true,
+    "filename": "table.csv"
+  }
+  
+  $('#example').table2csv('download', options);*/
+});
+});
+  

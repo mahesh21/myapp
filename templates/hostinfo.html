@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container-fluid">
+[SDN yahoo]
+SDN jajaj
+<div class="container-fluid" id="hostinfoDiv">
+    <p class="text-right">
+        <button type="button" class="btn btn-default" id="csvBtn">
+            <i class="fa fa-file-excel-o"></i> CSV Export 
+        </button>
+    </p>
+        
         <div class="panel panel-headline">
                 <div class="panel-heading">
                     <h3 class="panel-title">Hostname : localhost</h3>
@@ -186,10 +194,10 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">HBA Information</h3>
                         <div class="right">
-                            <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up lnr-chevron-down"></i></button>
+                            <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                         </div>
                     </div>
-                    <div class="panel-body" style="display:none;">
+                    <div class="panel-body" >
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
@@ -232,6 +240,7 @@
             
                 
         </div>
+        {% include 'hosttable.html' %}
    
    
 </div>
